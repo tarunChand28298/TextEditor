@@ -22,8 +22,6 @@ std::string ORiellyGetFileName(const std::string& s)
 	return("");
 }
 
-
-
 cMainWindow::cMainWindow() : wxFrame(nullptr, wxID_ANY, "Tabbed notepad")
 {
 	m_mainMenu = new wxMenuBar();
@@ -59,7 +57,7 @@ cMainWindow::cMainWindow() : wxFrame(nullptr, wxID_ANY, "Tabbed notepad")
 
 void cMainWindow::AddNewPage()
 {
-	wxTextCtrl* txtCtrlNew = new wxTextCtrl(m_notebook, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE, wxDefaultValidator, wxTextCtrlNameStr);
+	wxStyledTextCtrl* txtCtrlNew = new wxStyledTextCtrl(m_notebook, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE, wxTextCtrlNameStr);
 
 	TextFileMapping newMapping;
 	newMapping.textControl = txtCtrlNew;
@@ -92,7 +90,7 @@ void cMainWindow::HandleFileMenu(wxCommandEvent& e)
 				return;
 			}
 
-			wxTextCtrl* txtCtrlNew = new wxTextCtrl(m_notebook, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE, wxDefaultValidator, wxTextCtrlNameStr);
+			wxStyledTextCtrl* txtCtrlNew = new wxStyledTextCtrl(m_notebook, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE, wxTextCtrlNameStr);
 
 			TextFileMapping newMapping;
 			newMapping.textControl = txtCtrlNew;
@@ -104,7 +102,7 @@ void cMainWindow::HandleFileMenu(wxCommandEvent& e)
 			m_notebook->AddPage(txtCtrlNew, ORiellyGetFileName(filePath));
 			std::stringstream fileContents;
 			fileContents << openedFile.rdbuf();
-			*txtCtrlNew << fileContents.str();
+			txtCtrlNew->SetValue(fileContents.str());
 		} break;
 		case FileMenuSave:
 		{

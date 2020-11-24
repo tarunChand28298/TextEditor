@@ -2,6 +2,7 @@
 
 #include <wx/wx.h>
 #include <wx/aui/auibook.h>
+#include <wx/stc/stc.h>
 
 #include <map>
 
@@ -12,7 +13,7 @@
 
 struct TextFileMapping
 {
-	wxTextCtrl* textControl;
+	wxStyledTextCtrl* textControl;
 	bool mapped;
 	std::string mappedToFile;
 	int uiPageIndex;
