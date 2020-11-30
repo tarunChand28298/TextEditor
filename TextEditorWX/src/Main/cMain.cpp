@@ -22,7 +22,7 @@ std::string ORiellyGetFileName(const std::string& s)
 	return("");
 }
 
-cMainWindow::cMainWindow() : wxFrame(nullptr, wxID_ANY, "Tabbed notepad")
+cMainWindow::cMainWindow() : wxFrame(nullptr, wxID_ANY, "TextEditor")
 {
 	m_mainMenu = new wxMenuBar();
 	this->SetMenuBar(m_mainMenu);
@@ -58,6 +58,7 @@ cMainWindow::cMainWindow() : wxFrame(nullptr, wxID_ANY, "Tabbed notepad")
 void cMainWindow::AddNewPage()
 {
 	wxStyledTextCtrl* txtCtrlNew = new wxStyledTextCtrl(m_notebook, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE, wxTextCtrlNameStr);
+	txtCtrlNew->SetWrapMode(wxSTC_WRAP_WHITESPACE);
 
 	TextFileMapping newMapping;
 	newMapping.textControl = txtCtrlNew;
@@ -65,7 +66,6 @@ void cMainWindow::AddNewPage()
 	newMapping.mappedToFile = "";
 
 	textFileMappings.push_back(newMapping);
-
 	m_notebook->AddPage(txtCtrlNew, "Untitled " + std::to_string(textFileMappings.size()));
 }
 
@@ -91,6 +91,7 @@ void cMainWindow::HandleFileMenu(wxCommandEvent& e)
 			}
 
 			wxStyledTextCtrl* txtCtrlNew = new wxStyledTextCtrl(m_notebook, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE, wxTextCtrlNameStr);
+			txtCtrlNew->SetWrapMode(wxSTC_WRAP_WHITESPACE);
 
 			TextFileMapping newMapping;
 			newMapping.textControl = txtCtrlNew;
