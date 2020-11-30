@@ -1,4 +1,4 @@
-# Web Server:
+# Text Editor:
 As the title suggests, this is a text editor similar to notepad but with tabs. Suitable for quickly whiping up a text editor and open multiple tabs to edit text and make quick notes
 
 ## Motivation
